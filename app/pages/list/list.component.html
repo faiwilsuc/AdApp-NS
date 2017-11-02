@@ -1,0 +1,133 @@
+<StackLayout>
+
+    <StackLayout class="action-bar" orientation="horizontal">
+        <StackLayout class="icon section" orientation="horizontal" width="50%" horizontalAlignment="left">
+            <Image src="~/images/menu.png" class="action-image" (tap)="onMenu()"></Image>
+        </StackLayout>
+        <StackLayout class="icon section" orientation="horizontal" width="50%" horizontalAlignment="right">
+            <Image src="~/images/search.png" class="action-image" (tap)="onSearch()" style="margin-right: 20px;"></Image>
+            <Image src="~/images/toggle.png" class="action-image" (tap)="onToggle()" style="margin-right: 20px;"></Image>
+        </StackLayout>
+    </StackLayout>
+    <ScrollView orientation="horizontal">
+        <StackLayout orientation="horizontal">
+            <StackLayout *ngFor="let item of tabItems; let i=index" class="tab-btn text-center" [class.active]="selectedIndex == i" (tap)="selectedIndex = i">
+                <Label text="{{item.name}}" class="tab-label" [class.active]="selectedIndex == i"></Label>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+    <StackLayout class="action-bar" orientation="horizontal">
+        <StackLayout class="icon section" orientation="horizontal" width="50%" horizontalAlignment="left">
+            <Image src="~/images/sort.png" class="action-image" *ngIf="!isSort" (tap)="onSort()"></Image>
+            <Image src="~/images/sort_active.png" class="action-image" *ngIf="isSort" (tap)="onSort()"></Image>
+            <Label text="sort" class="text-sort h5" (tap)="onSort()"></Label>
+        </StackLayout>
+        <StackLayout class="icon" orientation="horizontal" width="50%" horizontalAlignment="right">
+            <Image src="~/images/icons.png" class="action-image" (tap)="onIcons()" *ngIf="!isIcons" style="margin-right: 20px;"></Image>
+            <Image src="~/images/icons_active.png" class="action-image" (tap)="onIcons()" *ngIf="isIcons" style="margin-right: 20px;"></Image>
+            <Image src="~/images/detail.png" class="action-image" (tap)="onDetail()" *ngIf="!isDetail" style="margin-right: 20px;"></Image>
+            <Image src="~/images/detail_active.png" class="action-image" (tap)="onDetail()" *ngIf="isDetail" style="margin-right: 20px;"></Image>
+        </StackLayout>
+    </StackLayout>
+    <!--<StackLayout class="sort-pane"  horizontalAlignment="left" *ngIf="isSort"> 
+        
+        <StackLayout orientation="horizontal" (tap)="onEdit(i)">
+            <Image src="~/images/search.png" width="20" style="margin: 10 10 10 10;" ></Image>    
+            <Label text="Edit" class="h6"  marginRight="10"></Label>
+        </StackLayout>
+        <StackLayout orientation="horizontal"  (tap)="onDelete(i)">
+            <Image src="~/images/search.png" width="20" style="margin:10 10 10 10;" ></Image>    
+            <Label text="Delete" class="h6" marginRight="10"></Label>
+        </StackLayout>
+    </StackLayout>-->
+    <DropDown #dd backroundColor="red" [items]="sortList" [selectedIndex]="selectedIndex" row="0" colSpan="2">
+    </DropDown>
+
+    <side-drawer-page>
+        <ScrollView>
+            <GridLayout rows="auto,*" class="container">
+                <StackLayout row="0" class="form">
+                    <StackLayout *ngFor="let item of popularList;" class="form">
+                        <GridLayout columns="*,*" *ngIf="isDetail" class="cell-container" marginRight="20">
+                            <StackLayout col="0">
+                                <Image src="{{item.image}}" stretch="aspectFit" class="content-image"></Image>
+                            </StackLayout>
+                            <StackLayout col="1" marginLeft="10">
+                                <Label text="{{item.title}}" class="h6 text-title"></Label>
+                                <Label text="{{item.address}}" class="h6 text-address"></Label>
+                                <Label text="{{item.price}}" class="h6 text-price"></Label>
+                                <StackLayout marginRight="10" style="border-top-width: 1; border-top-color: #d3d3d3">
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>
+
+                    </StackLayout>
+
+                    <StackLayout *ngFor="let item of popularList; let even=even; let i=index" class="form">
+
+                        <GridLayout columns="*,*" *ngIf="even && isIcons">
+                            <StackLayout col="0" class="cell-container">
+                                <Image src="{{popularList[i].image}}" stretch="aspectFit" class="content-image"></Image>
+                                <StackLayout class="content-container">
+                                    <Label text="{{popularList[i].title}}" class="h6 text-title"></Label>
+                                    <Label text="{{popularList[i].address}}" class="h6 text-address"></Label>
+                                    <Label text="{{popularList[i].price}}" class="h6 text-price"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout col="1" *ngIf="popularList[i+1]" class="cell-container" marginRight="20">
+                                <Image src="{{popularList[i+1].image}}" stretch="aspectFit" class="content-image"></Image>
+                                <StackLayout class="content-container">
+                                    <Label text="{{popularList[i+1].title}}" class="h6 text-title"></Label>
+                                    <Label text="{{popularList[i+1].address}}" class="h6 text-address"></Label>
+                                    <Label text="{{popularList[i+1].price}}" class="h6 text-price"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>
+
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout row="1" class="form">
+                    <Image src="~/images/google.png" stretch="fill" class="cell-container" marginRight="20"></Image>
+                    <StackLayout *ngFor="let item of recentList;" class="form">
+                        <GridLayout columns="*,*" *ngIf="isDetail" class="cell-container" marginRight="20">
+                            <StackLayout col="0">
+                                <Image src="{{item.image}}" stretch="aspectFit" class="content-image"></Image>
+                            </StackLayout>
+                            <StackLayout col="1" marginLeft="10">
+                                <Label text="{{item.title}}" class="h6 text-title"></Label>
+                                <Label text="{{item.address}}" class="h6 text-address"></Label>
+                                <Label text="{{item.price}}" class="h6 text-price"></Label>
+                                <StackLayout marginRight="10" style="border-top-width: 1; border-top-color: #d3d3d3">
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>
+
+                    </StackLayout>
+
+                    <StackLayout *ngFor="let item of recentList; let even=even; let i=index">
+                        <GridLayout columns="*,*" *ngIf="even && isIcons">
+                            <StackLayout col="0" class="form cell-container">
+                                <Image src="{{recentList[i].image}}" stretch="aspectFit" class="content-image"></Image>
+                                <StackLayout class="content-container">
+                                    <Label text="{{recentList[i].title}}" class="h6 text-title"></Label>
+                                    <Label text="{{recentList[i].address}}" class="h6 text-address"></Label>
+                                    <Label text="{{recentList[i].price}}" class="h6 text-price"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout col="1" *ngIf="recentList[i+1]" class="cell-container" marginRight="20">
+                                <Image src="{{recentList[i+1].image}}" stretch="aspectFit" class="content-image" style="margin-right: 20px;"></Image>
+                                <StackLayout class="content-container">
+                                    <Label text="{{recentList[i+1].title}}" class="h6 text-title"></Label>
+                                    <Label text="{{recentList[i+1].address}}" class="h6 text-address"></Label>
+                                    <Label text="{{recentList[i+1].price}}" class="h6 text-price"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>
+
+                    </StackLayout>
+                </StackLayout>
+                <ActivityIndicator [busy]="isLoading" [visibility]="isLoading ? 'visible' : 'collapse'" row="1" horizontalAlignment="center" verticalAlignment="center"></ActivityIndicator>
+            </GridLayout>
+        </ScrollView>
+    </side-drawer-page>
+</StackLayout>

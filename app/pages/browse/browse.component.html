@@ -1,0 +1,43 @@
+<StackLayout>
+    <StackLayout class="action-bar" orientation="horizontal" >
+        <StackLayout class="icon section" orientation="horizontal" horizontalAlignment="left">
+            <Image src="~/images/back_icon.png" class="action-image" (tap)="onBack()" width="10" ></Image>    
+        </StackLayout>
+        <StackLayout class="icon section" orientation="horizontal"  horizontalAlignment="center">
+            <Image src="~/images/browse_icon.png" class="action-image" style="margin-right: 10px" ></Image>    
+            <Label text="Browse" class="h4" style="color: black;"></Label>
+        </StackLayout>
+        <StackLayout class="section" orientation="horizontal" horizontalAlignment="right">
+            <Image src="~/images/search.png" class="action-image" (tap)="onSearch()" style="margin-right: 20px;" ></Image>    
+            <Image src="~/images/toggle.png" class="action-image" (tap)="onToggle()" style="margin-right: 20px;"></Image>    
+        </StackLayout>
+    </StackLayout>
+    <StackLayout orientation="horizontal" horizontalAlignment="left">
+        <Button text="NEPAL" class="btn-browse" (tap)="onNepal()"></Button>
+        <Button text="ALL ADS" class="btn-browse" (tap)="onAds()"></Button>
+    </StackLayout>
+    <ScrollView>
+        <StackLayout>
+            <StackLayout *ngFor="let item of dataList; let i=index;" class="form" >
+                <GridLayout columns="*,*" class="cell-container" marginRight="20">
+                    <StackLayout col="0" >
+                        <Image src="{{item.image}}" stretch="aspectFit" class="content-image"></Image>
+                    </StackLayout>
+                    <StackLayout col="1" marginLeft="10">
+                        <StackLayout orientation="horizontal">
+                            <StackLayout width="50%">
+                                <Label text="{{item.title}}" class="h6 text-title"></Label>
+                            </StackLayout>
+                            <StackLayout width="50%" horizontalAlignment="right" orientation="horizontal">
+                                <Image src="~/images/star.png" width="20" style=" margin-right: 10; margin-top: 10;" (tap)="onFav(i)" *ngIf="!item.favStatus"> </Image>
+                                <Image src="~/images/star_icon.png" width="20" style=" margin-right: 10; margin-top: 10;" (tap)="onFav(i)" *ngIf="item.favStatus"> </Image>
+                            </StackLayout>
+                        </StackLayout>
+                        <Label text="{{item.address}}" class="h6 text-address"></Label>
+                        <Label text="{{item.price}}" class="h6 text-price"></Label>
+                    </StackLayout>
+                </GridLayout>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</StackLayout>

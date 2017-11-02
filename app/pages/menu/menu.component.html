@@ -1,0 +1,47 @@
+<ScrollView>
+    <StackLayout orientation="vertical" class="menu-background">
+        <StackLayout orientation="horizontal" horizontalAlignment="center">
+            <Image src="~/images/user.png" width="30" *ngIf="isLogin"></Image>
+            <StackLayout *ngIf="!isLogin">
+                <Label text="Welcome" class="menu-title h3"></Label>
+                <Label text="Buy, Sell, Win" class="h6" style="color: #808080;"></Label>
+            </StackLayout>
+
+        </StackLayout>
+        <StackLayout orientation="horizontal" horizontalAlignment="center">
+            <Label text="Carl Jung" class="menu-title h4" marginTop="20" marginBottom="20" *ngIf="isLogin"></Label>
+            <Button text="SIGN IN" class="btn btn-signin btn-rounded-lg h5" (tap)="onLogIn()" *ngIf="!isLogin"></Button>
+        </StackLayout>
+
+        <StackLayout class="menu-list-item" orientation="horizontal" (tap)="onHome()">
+            <Image src="~/images/search_icon.png" class="menu-image"></Image>
+            <Label text="Home" class="menu-label"></Label>
+        </StackLayout>
+
+        <StackLayout class="menu-list-item" orientation="horizontal" (tap)="onPost()">
+            <Image src="~/images/camera_icon.png" class="menu-image"></Image>
+            <Label text="Post" class="menu-label"></Label>
+        </StackLayout>
+        <StackLayout class="menu-list-item" orientation="horizontal" (tap)="onMessage()">
+            <Image src="~/images/message_icon.png" class="menu-image"></Image>
+            <Label text="My Messages" class="menu-label"></Label>
+        </StackLayout>
+        <StackLayout class="menu-list-item" orientation="horizontal" (tap)="onAds()">
+            <Image src="~/images/folder_icon.png" class="menu-image"></Image>
+            <Label text="My Ads" class="menu-label"></Label>
+        </StackLayout>
+        <StackLayout class="menu-list-item" orientation="horizontal" (tap)="onBrowse()">
+            <Image src="~/images/web_icon.png" class="menu-image"></Image>
+            <Label text="Browse" class="menu-label"></Label>
+        </StackLayout>
+        <StackLayout class="menu-list-item" orientation="horizontal" (tap)="onWatchList()">
+            <Image src="~/images/star_icon.png" class="menu-image"></Image>
+            <Label text="WatchList" class="menu-label"></Label>
+        </StackLayout>
+        <StackLayout class="menu-list-item" orientation="horizontal" (tap)="onLogout()" *ngIf="isLogin">
+            <Image src="~/images/logout_icon.png" class="menu-image"></Image>
+            <Label text="Log out" class="menu-label"></Label>
+        </StackLayout>
+
+    </StackLayout>
+</ScrollView>

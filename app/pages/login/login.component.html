@@ -1,0 +1,41 @@
+<ScrollView>
+    <!--<GridLayout rows="*" >-->
+    <GridLayout rows="auto, *" [visibility]="viewContent ? 'visible' : 'collapsed'">
+        <Image src="~/images/logo.png" stretch="fill" class="initial-logo" row="0"></Image>
+        <StackLayout row="1" class="form  m-t-10" marginLeft="10">
+            <Label text="Sign in" textWrap="true" class="text-black"></Label>
+            <StackLayout class=" login-input-wrapper">
+                <TextField [(ngModel)]="login.email" autocorrect="false" autocapitalizationType="none" keyboardType="email" hint="Email" text="" class="input login-input" style="padding: 10 0 10 0;"></TextField>
+            </StackLayout>
+            <Label text="Please enter Email Address!" [visibility]="requiredEmail ? 'visible' : 'collapsed'" textWrap="true" class="text-black"></Label>
+            <Label text="Please enter valid Email Address" [visibility]="inValidEmail ? 'visible' : 'collapsed'" textWrap="true" class="text-black"></Label>
+            <GridLayout columns="*,auto" class="login-input-wrapper ">
+                <StackLayout col="0" orientatation="horizontal" horizontalAlignment="left">
+                    <TextField [(ngModel)]="login.password" hint="Password" keyboardType="text" text="" secure="true" class="input login-input" style="padding: 10 0 10 0;"></TextField>
+                </StackLayout>
+                <StackLayout col="1" orientatation="horizontal" horizontalAlignment="left" verticalAlignment="middle">
+                    <Image src="~/images/pass_preview.png" style="margin-right:20px;" width="20" (tap)="onPreview()"></Image>
+                </StackLayout>
+
+            </GridLayout>
+            <Label text="Please Password!" [visibility]="requiredPassword ? 'visible' : 'collapsed'" textWrap="true" class="text-black"></Label>
+
+            <Button text="SIGN IN" (tap)="onLogin()" class="btn btn-signin btn-rounded-lg h5" marginTop="20"></Button>
+            <StackLayout orientation="horizontal" marginTop="10" marginRight="30" marginLeft="30">
+                <StackLayout width="50%" orientation="horizontal">
+                    <Label text="Forgot Password" (tap)="onForgotPassword()" class="text-black h6" style="text-align: left;"></Label>
+                </StackLayout>
+                <StackLayout width="50%" orientation="horizontal" horizontalAlignment="right">
+                    <Label text="Sign up" [nsRouterLink]="['/register']" class="text-black h6" style="text-align: right;"></Label>
+                    <Label text=" free" [nsRouterLink]="['/register']" class="h6" style="text-align: right; color: red;"></Label>
+                </StackLayout>
+            </StackLayout>
+            <Label text="OR" textWrap="true" class="text-black h5" marginTop="5"></Label>
+            <Button text="Sign in with Facebook" (tap)="onFacebookLogin()" class="btn btn-facebook btn-rounded-lg h5" marginTop="10"></Button>
+            <Button text="Sign in With Google" (tap)="onGoogleLogin()" class="btn btn-google btn-rounded-lg h5" marginTop="15"></Button>
+        </StackLayout>
+    </GridLayout>
+
+    <!--<ActivityIndicator [busy]="isLoading" [visibility]="isLoading ? 'visible' : 'collapse'" horizontalAlignment="center" verticalAlignment="center"></ActivityIndicator>
+    </GridLayout>-->
+</ScrollView>

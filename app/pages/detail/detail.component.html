@@ -1,0 +1,73 @@
+<StackLayout>
+    <StackLayout class="action-bar" orientation="horizontal">
+        <StackLayout class="icon section" orientation="horizontal" horizontalAlignment="left" width="50%">
+            <Image src="~/images/back_icon.png" class="action-image" (tap)="onBack()" width="10"></Image>
+        </StackLayout>
+        <StackLayout class="section" orientation="horizontal" horizontalAlignment="right" width="50%">
+            <Image src="~/images/toggle.png" class="action-image" (tap)="onShare()" style="margin-right: 20px;"></Image>
+        </StackLayout>
+    </StackLayout>
+    <ScrollView>
+        <StackLayout>
+            <ScrollView orientation="horizontal">
+                <StackLayout orientation="horizontal">
+                    <StackLayout *ngFor="let item of imageList">
+                        <Image src="{{item.imagepath}}" stretch="aspectFit" height="300" marginRight="20"></Image>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout class="content-container">
+                <StackLayout orientation="horizontal">
+                    <Label text="{{general_data?.title}}" class="h4 text-title"></Label>
+                </StackLayout>
+                <Label text="{{general_data?.location_address}}" class="h5 text-address"></Label>
+                <Label text="{{general_data?.price}}" class="h4 text-price"></Label>
+            </StackLayout>
+            <StackLayout>
+
+                <StackLayout *ngFor="let item of dataList; let i=index;" orientation="horizontal" class="spec-data-container">
+                    <GridLayout columns="auto,*">
+                        <StackLayout orientation="horizontal" horizontalAlignment="left" marginRight="20">
+                            <Label col="0" text="{{item.key}}:" class="spec-label"></Label>
+                        </StackLayout>
+                        <StackLayout col="1" orientation="horizontal" horizontalAlignment="right">
+                            <Label text="{{item.value}}"></Label>
+                        </StackLayout>
+                    </GridLayout>
+                </StackLayout>
+                <StackLayout orientation="horizontal" class="h6" horizontalAlignment="left" marginTop="20" marginLeft="20" marginRight="10">
+                    <TextView text="{{ general_data?.description }}">
+                    </TextView>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout orientation="horizontal" class="title-btn-wrap">
+                <Label text="Popular Ads" width="50%" class="text-black h6 title-btn-left"></Label>
+                <StackLayout orientation="horizontal" horizontalAlignment="right" width="50%">
+                    <Label text="View All" (tap)="gotoList()" class="h6 title-btn-right"></Label>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout *ngFor="let item of popularList; let even=even; let i=index" class="form">
+                <GridLayout columns="*,*" *ngIf="even">
+                    <StackLayout col="0" class="cell-container">
+                        <Image src="{{popularList[i].image}}" stretch="aspectFit" class="content-image"></Image>
+                        <StackLayout class="content-container">
+                            <Label text="{{popularList[i].title}}" class="h6 text-title"></Label>
+                            <Label text="{{popularList[i].address}}" class="h6 text-address"></Label>
+                            <Label text="{{popularList[i].price}}" class="h6 text-price"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout col="1" *ngIf="popularList[i+1]" class="cell-container" marginRight="20">
+
+                        <Image src="{{popularList[i+1].image}}" stretch="aspectFit" class="content-image"></Image>
+                        <StackLayout class="content-container">
+                            <Label text="{{popularList[i+1].title}}" class="h6 text-title"></Label>
+                            <Label text="{{popularList[i+1].address}}" class="h6 text-address"></Label>
+                            <Label text="{{popularList[i+1].price}}" class="h6 text-price"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                </GridLayout>
+
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</StackLayout>

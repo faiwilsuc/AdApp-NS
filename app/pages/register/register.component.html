@@ -1,0 +1,33 @@
+<ScrollView>
+    <GridLayout rows="*, *">
+        <Image src="~/images/logo.png" stretch="fill" class="initial-logo" row="0"></Image>
+        <StackLayout row="1" class="form  m-t-10" marginLeft="10">
+            <Label text="Sign up" textWrap="true" class="text-black"></Label>
+            <StackLayout class=" login-input-wrapper">
+                <TextField [(ngModel)]="register.email" autocorrect="false" autocapitalizationType="none" keyboardType="email" hint="Email" class="input login-input" style="padding: 10 0 10 0;"></TextField>
+            </StackLayout>
+            <GridLayout columns="*,auto" class=" login-input-wrapper">
+                <StackLayout col="0" orientatation="horizontal" horizontalAlignment="left">
+                    <TextField [(ngModel)]="register.password" hint="Password" keyboardType="text" secure="true" class="input login-input" style="padding: 10 0 10 0;"></TextField>
+                </StackLayout>
+                <StackLayout col="1" orientatation="horizontal" horizontalAlignment="left" verticalAlignment="middle">
+                    <Image src="~/images/pass_preview.png" style="margin-right:20px;" width="20" (tap)="onPassPreview()"></Image>
+                </StackLayout>
+            </GridLayout>
+            <GridLayout columns="*,auto" class=" login-input-wrapper">
+                <StackLayout col="0" orientatation="horizontal" horizontalAlignment="left">
+                    <TextField [(ngModel)]="verify_password" hint="Password verify" keyboardType="text" secure="true" class="input login-input" style="padding: 10 0 10 0;"></TextField>
+                </StackLayout>
+                <StackLayout col="1" orientatation="horizontal" horizontalAlignment="left" verticalAlignment="middle">
+                    <Image src="~/images/password_verify_preview.png" style="margin-right:20px;" width="20" (tap)="onPassVerifyPreview()"></Image>
+                </StackLayout>
+            </GridLayout>
+            <StackLayout class=" login-input-wrapper">
+                <TextField [(ngModel)]="verify_text" autocorrect="false" autocapitalizationType="none" keyboardType="text" hint="Please type the following text" class="input login-input" style="padding: 10 0 10 0;"></TextField>
+            </StackLayout>
+            <Button text="SIGN UP" (tap)="onTap()" class="btn btn-signin btn-rounded-lg h5" marginTop="15"></Button>
+            <Label text="By clicking 'Register', you are agreeing to our " textWrap="true" class="text-black h6" marginTop="10"></Label>
+            <Label text="terms of use and privacy police." textWrap="true" class="text-black h6" style="color: #f47f48;"></Label>
+        </StackLayout>
+    </GridLayout>
+</ScrollView>

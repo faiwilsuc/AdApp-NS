@@ -1,0 +1,105 @@
+<StackLayout>
+    <StackLayout class="action-bar" orientation="horizontal">
+        <StackLayout class="icon section" orientation="horizontal" horizontalAlignment="left">
+            <Image src="~/images/back_icon.png" class="action-image" (tap)="onBack()" width="10"></Image>
+        </StackLayout>
+        <StackLayout class="icon section" orientation="horizontal" horizontalAlignment="center">
+            <Image src="~/images/star.png" class="action-image" style="margin-right: 10px"></Image>
+            <Label text="Watchlist" class="h4" style="color: black;"></Label>
+        </StackLayout>
+        <StackLayout class="section" orientation="horizontal" horizontalAlignment="right">
+            <Image src="~/images/search.png" class="action-image" (tap)="onSearch()" style="margin-right: 20px;"></Image>
+            <Image src="~/images/toggle.png" class="action-image" (tap)="onToggle()" style="margin-right: 20px;"></Image>
+        </StackLayout>
+    </StackLayout>
+    <ScrollView row="0" orientation="horizontal">
+        <StackLayout orientation="horizontal">
+            <StackLayout *ngFor="let item of tabItems; let i=index" class="tab-btn text-center" [class.active]="selectedIndex == i" (tap)="selectedIndex = i">
+                <Label text="{{item.name}}" class="tab-label" [class.active]="selectedIndex == i"></Label>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+    <StackLayout row="1" class="action-bar" orientation="horizontal">
+        <StackLayout class="icon section" orientation="horizontal" width="50%" horizontalAlignment="left">
+            <Image src="~/images/sort.png" class="action-image" *ngIf="!isSort" (tap)="onSort()"></Image>
+            <Image src="~/images/sort_active.png" class="action-image" *ngIf="isSort" (tap)="onSort()"></Image>
+            <Label text="sort" class="text-sort h5" (tap)="onSort()"></Label>
+        </StackLayout>
+        <StackLayout class="icon" orientation="horizontal" width="50%" horizontalAlignment="right">
+            <Image src="~/images/icons.png" class="action-image" (tap)="onIcons()" *ngIf="!isIcons" style="margin-right: 20px;"></Image>
+            <Image src="~/images/icons_active.png" class="action-image" (tap)="onIcons()" *ngIf="isIcons" style="margin-right: 20px;"></Image>
+            <Image src="~/images/detail.png" class="action-image" (tap)="onDetail()" *ngIf="!isDetail" style="margin-right: 20px;"></Image>
+            <Image src="~/images/detail_active.png" class="action-image" (tap)="onDetail()" *ngIf="isDetail" style="margin-right: 20px;"></Image>
+        </StackLayout>
+    </StackLayout>
+    <ScrollView>
+        <GridLayout rows="auto,*,*" class="container">
+            <StackLayout row="0" class="form">
+                <StackLayout *ngFor="let item of dataList; let i=index;" class="form">
+                    <GridLayout columns="*,*" *ngIf="isDetail" class="cell-container" marginRight="20">
+                        <StackLayout col="0">
+                            <Image src="{{item.image}}" stretch="aspectFit" class="content-image"></Image>
+                        </StackLayout>
+                        <StackLayout col="1" marginLeft="10">
+                            <StackLayout orientation="horizontal">
+                                <StackLayout width="50%">
+                                    <Label text="{{item.title}}" class="h6 text-title"></Label>
+                                </StackLayout>
+                                <StackLayout width="50%" horizontalAlignment="right" orientation="horizontal">
+                                    <Image src="~/images/star.png" width="20" style=" margin-right: 10; margin-top: 10;" (tap)="onFav(i)" *ngIf="!item.favStatus"> </Image>
+                                    <Image src="~/images/star_icon.png" width="20" style=" margin-right: 10; margin-top: 10;" (tap)="onFav(i)" *ngIf="item.favStatus"> </Image>
+                                </StackLayout>
+                            </StackLayout>
+                            <Label text="{{item.address}}" class="h6 text-address"></Label>
+                            <Label text="{{item.price}}" class="h6 text-price"></Label>
+                        </StackLayout>
+                    </GridLayout>
+
+                </StackLayout>
+
+                <StackLayout *ngFor="let item of dataList; let even=even; let i=index" class="form">
+
+                    <GridLayout columns="*,*" *ngIf="even && isIcons">
+                        <StackLayout col="0" class="cell-container">
+                            <Image src="{{dataList[i].image}}" stretch="aspectFit" class="content-image"></Image>
+                            <StackLayout class="content-container">
+                                <StackLayout orientation="horizontal">
+                                    <StackLayout width="50%">
+                                        <Label text="{{dataList[i].title}}" class="h6 text-title"></Label>
+                                    </StackLayout>
+                                    <StackLayout width="50%" horizontalAlignment="right" orientation="horizontal">
+                                        <Image src="~/images/star.png" width="20" style=" margin-right: 10; margin-top: 10;" (tap)="onFav(i)" *ngIf="!item.favStatus"> </Image>
+                                        <Image src="~/images/star_icon.png" width="20" style=" margin-right: 10; margin-top: 10;" (tap)="onFav(i)" *ngIf="item.favStatus"> </Image>
+                                    </StackLayout>
+                                </StackLayout>
+                                <Label text="{{dataList[i].address}}" class="h6 text-address"></Label>
+                                <Label text="{{dataList[i].price}}" class="h6 text-price"></Label>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout col="1" *ngIf="dataList[i+1]" class="cell-container" marginRight="20">
+                            <Image src="{{dataList[i+1].image}}" stretch="aspectFit" class="content-image"></Image>
+                            <StackLayout class="content-container">
+                                <StackLayout orientation="horizontal">
+                                    <StackLayout width="50%">
+                                        <Label text="{{dataList[i+1].title}}" class="h6 text-title"></Label>
+                                    </StackLayout>
+                                    <StackLayout width="50%" horizontalAlignment="right" orientation="horizontal">
+                                        <Image src="~/images/star.png" width="20" style=" margin-right: 10; margin-top: 10;" (tap)="onFav(i+1)" *ngIf="!dataList[i+1].favStatus"> </Image>
+                                        <Image src="~/images/star_icon.png" width="20" style=" margin-right: 10; margin-top: 10;" (tap)="onFav(i+1)" *ngIf="dataList[i+1].favStatus"> </Image>
+                                    </StackLayout>
+                                </StackLayout>
+                                <Label text="{{dataList[i+1].address}}" class="h6 text-address"></Label>
+                                <Label text="{{dataList[i+1].price}}" class="h6 text-price"></Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+
+                </StackLayout>
+            </StackLayout>
+
+            <ActivityIndicator [busy]="isLoading" [visibility]="isLoading ? 'visible' : 'collapse'" row="1" horizontalAlignment="center" verticalAlignment="center"></ActivityIndicator>
+        </GridLayout>
+    </ScrollView>
+
+
+</StackLayout>

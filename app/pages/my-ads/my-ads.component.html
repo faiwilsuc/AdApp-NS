@@ -1,0 +1,48 @@
+<StackLayout>
+    <StackLayout class="action-bar" orientation="horizontal" >
+        <StackLayout class="icon section" orientation="horizontal" horizontalAlignment="left">
+            <Image src="~/images/back_icon.png" class="action-image" (tap)="onBack()" width="10" ></Image>    
+        </StackLayout>
+        <StackLayout class="icon section" orientation="horizontal"  horizontalAlignment="center">
+            <Image src="~/images/folder_color.png" class="action-image" style="margin-right: 10px" ></Image>    
+            <Label text="My Ads" class="h4" style="color: black;"></Label>
+        </StackLayout>
+        <StackLayout class="section" orientation="horizontal" horizontalAlignment="right">
+            <Image src="~/images/search.png" class="action-image" (tap)="onSearch()" style="margin-right: 20px;" ></Image>    
+        </StackLayout>
+    </StackLayout>
+    <ScrollView>
+        <StackLayout>
+            <StackLayout *ngFor="let item of dataList; let i=index;" class="form" >
+                <GridLayout columns="*,*" class="cell-container" marginRight="20">
+                    <StackLayout col="0" >
+                        <Image src="{{item.image}}" stretch="aspectFit" class="content-image"></Image>
+                    </StackLayout>
+                    <StackLayout col="1" marginLeft="10">
+                        <StackLayout orientation="horizontal">
+                            <StackLayout width="50%">
+                                <Label text="{{item.title}}" class="h6 text-title"></Label>
+                            </StackLayout>
+                            <StackLayout width="50%" horizontalAlignment="right" orientation="horizontal">
+                                <Image src="~/images/more_icon.png" width="20" style=" margin-right: 10; margin-top: 10;" (tap)="onMenu(i)" > </Image>
+                                <!--<Image src="~/images/star_icon.png" width="20" style=" margin-right: 10; margin-top: 10;" *ngIf="star_status[i]" (tap)="star_status[i]=!star_status[i]"> </Image>-->
+                            </StackLayout>
+                        </StackLayout>
+                        <Label text="{{item.address}}" class="h6 text-address"></Label>
+                        <Label text="{{item.price}}" class="h6 text-price"></Label>
+                        <StackLayout class="menu-pane" *ngIf="item.menuStatus"  horizontalAlignment="right"> 
+                            <StackLayout orientation="horizontal" (tap)="onEdit(i)">
+                                <Image src="~/images/edit_icon.png" width="20" style="margin: 10 10 10 10;" ></Image>    
+                                <Label text="Edit" class="h6"  marginRight="10"></Label>
+                            </StackLayout>
+                            <StackLayout orientation="horizontal"  (tap)="onDelete(i)">
+                                <Image src="~/images/delete_icon.png" width="20" style="margin:10 10 10 10;" ></Image>    
+                                <Label text="Delete" class="h6" marginRight="10"></Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </GridLayout>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</StackLayout>

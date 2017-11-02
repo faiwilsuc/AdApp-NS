@@ -1,0 +1,25 @@
+<StackLayout>
+    <StackLayout class="action-bar" orientation="horizontal" >
+        <StackLayout class="icon section" orientation="horizontal" horizontalAlignment="left" >
+            <Image src="~/images/back_icon.png" class="action-image" (tap)="onBack()" width="10"></Image>    
+        </StackLayout>
+        <StackLayout class="icon section" orientation="horizontal" horizontalAlignment="center">
+            <Image src="~/images/duplicate_icon.png" class="action-image" style="margin-right: 10px;" ></Image>    
+            <Label text="Category" class="h4" style="color: black;"></Label>
+        </StackLayout>
+        <StackLayout class="section" orientation="horizontal"></StackLayout>
+    </StackLayout>
+    <ScrollView>
+        <StackLayout>
+            <StackLayout *ngFor="let item of subCategoryList; let i=index" orientation="horizontal" class="category-item" (tap)="gotoBrowse(i)">
+                <StackLayout orientation="horizontal" width="70%">
+                    <Label text="{{item.name}}" class="category-label"></Label>
+                </StackLayout>
+                <StackLayout  orientation="horizontal" horizontalAlignment="right" width="30%">
+                    <Label text="{{item.item_nums}}" class="category-label" style="color:#a9a9a9;"></Label>
+                    <Image src="~/images/forward_icon.png" class="category-image" ></Image>    
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</StackLayout>
